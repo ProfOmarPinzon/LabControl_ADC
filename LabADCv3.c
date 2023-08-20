@@ -1,6 +1,6 @@
-/* Ejemplo PWM
+/* Ejemplo ADC
  * Laboratorio de Sistemas de Control II
- * Prof. Omar Pinz髇-Ardila
+ * Prof. Omar Pinz贸n-Ardila
  */
 
 // Incluir el archivo de cabecera del MCU
@@ -26,7 +26,7 @@ void InitADC(void)
 
     DELAY_US(5000); // Retardo 5ms antes de utilizar el ADC
 
-    AdcRegs.ADCMAXCONV.all = 0x0000;  // N鷐erod e conversiones
+    AdcRegs.ADCMAXCONV.all = 0x0000;  // N煤merod e conversiones
     // bit 15-7      0's:    reserved
     // bit 6-4       000:    MAX_CONV2 value
     // bit 3-0       0000:   MAX_CONV1 value (0 means 1 conversion)
@@ -36,9 +36,9 @@ void InitADC(void)
     // are don't cares in this example.
 
     AdcRegs.ADCCHSELSEQ1.bit.CONV00 = 0;    // Convert Channel 0
-//    AdcRegs.ADCSOC0CTL.bit.TRIGSEL = 0; // Seleccionar fuente de trigger para conversi髇 (software)
+//    AdcRegs.ADCSOC0CTL.bit.TRIGSEL = 0; // Seleccionar fuente de trigger para conversi贸n (software)
 //    AdcRegs.ADCSOC0CTL.bit.CHSEL = ADC_CHANNEL; // Seleccionar canal ADC
-//    AdcRegs.ADCSOC0CTL.bit.ACQPS = 6; // Configurar el n鷐ero de ciclos de conversi髇
+//    AdcRegs.ADCSOC0CTL.bit.ACQPS = 6; // Configurar el n煤mero de ciclos de conversi贸n
 
     AdcRegs.ADCASEQSR.bit.SEQ_CNTR =1;
 AdcRegs.ADCTRL1.bit.ACQ_PS =1;
@@ -49,9 +49,9 @@ Uint16 ReadADC(void)
 {
     Uint16 result;
 
-    // Iniciar conversi髇 ADC
+    // Iniciar conversi贸n ADC
     AdcRegs.ADCTRL2.bit.SOC_SEQ1 = 1;
-    // Esperar a que finalice la conversi髇
+    // Esperar a que finalice la conversi贸n
     while (AdcRegs.ADCST.bit.EOS_BUF1 == 1)
         ;
     // Leer el resultado del ADC
@@ -72,7 +72,7 @@ int main(void)
         Uint16 adcValue = ReadADC();
 
         //...
-        // Hacer algo con el valor le韉o
+        // Hacer algo con el valor le铆do
         // ...
 
         DELAY_US(100000); // Retardo de 100 ms
